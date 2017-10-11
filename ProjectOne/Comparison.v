@@ -10,7 +10,7 @@ GREATER G (.X(X), .Y(Y), .Z(GR));
 LESS_THAN L (.X(X), .Y(Y), .Z(LT));
 MAX M (.X(X), .Y(Y), .Z(MX));
 
-Mux MU (EQ, GR, LT, MX, Out); 
+  Mux MU (EQ, GR, LT, MX, Select, Out); 
 
 //	//begin
 //		if (Select[0]==0)
