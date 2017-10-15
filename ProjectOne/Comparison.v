@@ -2,15 +2,15 @@ module Comparison(X, Y, Select, Out);
 
 input [3:0] X,Y;
 input [1:0] Select;
-output[3:0] Out;
-wire [3:0] EQ, GR, LT, MX;
+output[7:0] Out;
+wire [7:0] EQ, GR, LT, MX;
 
 EQUAL E (.X(X), .Y(Y), .Z(EQ));
 GREATER G (.X(X), .Y(Y), .Z(GR));
 LESS_THAN L (.X(X), .Y(Y), .Z(LT));
 MAX M (.X(X), .Y(Y), .Z(MX));
 
-  Mux MU (EQ, GR, LT, MX, Select, Out); 
+Mux MU ({4'b0000,EQ}, {4'b0000,GR}, {4'b0000,LT}, {4'b0000,MX}, Select, Out); 
 
 //	//begin
 //		if (Select[0]==0)
