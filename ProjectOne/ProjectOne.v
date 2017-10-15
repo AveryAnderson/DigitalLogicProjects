@@ -25,7 +25,7 @@ module ProjectOne(
 	output		     [9:0]		LEDR,
 
 	//////////// SW //////////
-	input 		     [9:0]		SW,
+	input 		     [9:0]		SW
 
 );
 
@@ -34,7 +34,7 @@ module ProjectOne(
 //=======================================================
 //  REG/WIRE declarations
 //=======================================================
-myTop(SW [9:0]);
+myTop(SW [9:0],HEX0 [7:0],HEX1 [7:0],HEX2 [7:0],HEX3 [7:0],HEX4 [7:0],HEX5 [7:0],LEDR [9:0],ADC_CLK_10, KEY [1:0]);
 
 
 
