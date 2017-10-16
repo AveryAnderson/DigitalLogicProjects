@@ -24,7 +24,6 @@ module Twobitfulladder(x,y,cin,sout,cout);
 input x, y, cin;
 output sout, cout;
 wire s1, c1, c2;
-
 assign s1 = x^y;
 assign c1 = x&y;
 assign c2 = s1&cin;
@@ -33,19 +32,22 @@ assign cout = c1|c2;
 
 endmodule
 
-module subtract(x,y,minus,cin,cout);
-input [3:0] x,y;
-input cin;
-output [3:0] minus;
-output cout;
-wire c1, c2, c3, ynew;
-
-assign ynew = x^y;
-
-fourbitAdder subtract(x,ynew,minus,cin,cout)
+module AddSubtract(A,B,Cin,SumorMinus,Cout);
+  input [3:0] A,B;
+  input Cin;
+  output [3:0] SumorMinus;
+  output Cout;
+  wire [3:0] new;
+  wire c1, c2, c3;
+  
+  always @(A or B or Cin)
+  assign new[0] = B[0]^Cin;
+  assign new[1] = B[1]^Cin;
+  assign new[2] = B[2]^Cin;
+  assign new[3] = B[3]^Cin;
+  
+  fourbitAdder addsub(x,new,SumorMinus,cin,cout);
 endmodule
-
-module 
 
 module multiply(z,cin,prod,cout);
 input [7:0] z;
@@ -53,6 +55,7 @@ input cin;
 output [7:0] prod;
 output cout;
 
+  always @(z)
 assign prod = z<<;
 
 endmodule
@@ -63,6 +66,7 @@ input cin;
 output [7:0] quotient;
 output remain;
 
+  always @(z)
 assign quotient = z>>;
 
 endmodule
