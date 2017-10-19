@@ -51,7 +51,13 @@ module multiply(z,cin,prod,cout);
   input cin;
   output [7:0] prod;
   output cout;
+  wire [8:0] check;
   
+  assign check = z<<;
+  begin
+    if (check[8] == 1)
+      //led blink
+      end
   assign prod = z<<;
 endmodule
 
@@ -60,6 +66,12 @@ module divide(z,cin,quotient,remain);
   input cin;
   output [7:0] quotient;
   output remain;
+  wire [8:0] check;
   
+  assign check = z>>;
+  begin
+    if (check[0] ==1)
+      //led blink
+      end
   assign quotient = z>>;
 endmodule
