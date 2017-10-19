@@ -2,11 +2,15 @@ module Arithmetic(X,Y, sel, out);
 input [3:0] X,Y;
 input [1:0] sel;
 output [7:0] out;
+wire [3:0] Add,Subt;
+wire [7:0] Mult,Div;
 
 reg tempOut;
 
 assign out = 5;
 
+  Mux(Add, Subt, Mult, Div, sel, out);
+  
 endmodule 
 
 module fourbitadder(x, y, sum);
