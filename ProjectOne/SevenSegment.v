@@ -3,6 +3,9 @@ module SevenSegment(
 	output reg [7:0] HEXX
 	);
 	
+	//Whenever anything changes, run through all sixteen possible numbers that can
+	//be represented by the 3 bit number val.  Then using the standard sevenseg display
+	//binary representations, store the appropriate value in the passed Hex register
 	always @ (*)
 		case(val)
 			0:  HEXX [7:0] = 8'b11000000;

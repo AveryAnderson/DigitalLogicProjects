@@ -9,7 +9,8 @@ reg [16:0]  counter = 0;
 reg [9:0] fakeLED = 1;
 
 
-//Whenever there is a clock signal increment the counter
+//Whenever there is a clock signal increment the counter. Use this counter to create
+//a much slower wave named slow.
 always @(posedge ADC_CLK_10)
 begin
 	counter <= counter + 1;
@@ -20,39 +21,38 @@ begin
 		end
 end
 
+//count will allow us to know when we have reached both ends of the board
 reg [4:0] count = 0;
 
-
+//When ever the slow clock ticks, change the state of the leds
 always @ (posedge slow)
 begin
-	if(sel == 3)
+	
+	//Increment the count, and assign LEDR to be the value of fakeLED
+	count <= count + 1;
+	LEDR <= fakeLED;
+	
+	//If the bit of fakeLED has not yet reached the left most LED, move it one
+	//space over (left shift it until we count to nine)
+	if(count < 9)
 	begin
-		count <= count + 1;
-		LEDR <= fakeLED;
-		if(count < 9)
-		begin
-			fakeLED <= fakeLED*2;
-		end
-		else
-		begin
-			fakeLED <= fakeLED/2;
-		end
-		if(count == 19)
-		begin
-			count <= 0;
-			fakeLED <= 1;
-		end
-		
-		if(LEDR == 1024)
-		begin
-			LEDR <= 0;
-			fakeLED = 1;
-		end
+		fakeLED <= fakeLED*2;
 	end
+	
+	//Between 9 and 19, right shift fakeLED
 	else
 	begin
-		LEDR <= 0;
+		fakeLED <= fakeLED/2;
 	end
+	
+	//If count is ninteen, reset count and fakeLED to one
+	if(count == 19)
+	begin
+		count <= 0;
+		fakeLED <= 1;
+	end
+		
+	
 end
 
 endmodule

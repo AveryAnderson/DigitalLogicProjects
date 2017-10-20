@@ -2,7 +2,7 @@ module myTop(SW,HEX0,HEX1,HEX2,HEX3,HEX4,HEX5,LEDR,ADC_CLK_10,KEY);
 //Initialization of all of the inputs and outputs of the system
 input [9:0] SW;
 output [7:0] HEX0, HEX1, HEX2, HEX3, HEX4, HEX5;
-output [9:0] LEDR;
+output reg [9:0] LEDR;
 input ADC_CLK_10;
 input [1:0] KEY;
 
@@ -30,20 +30,33 @@ end
 
 //Create and store the proper values for each of the main outputs
 wire [7:0] COut,LOut,AOut,MOut, Out;
-Comparison(X, Y, buttonSel, COut);
-Logical(X,Y, buttonSel, LOut);
-Arithmetic(X,Y, buttonSel, AOut);
-Magic(ADC_CLK_10, LEDR[9:0], switchSel);
+wire [9:0] ALED, MLED;
+Comparison(X, Y, switchSel, COut);
+Logical(X,Y, switchSel, LOut);
+Arithmetic(X,Y, switchSel, AOut, ALED[9:0]);
+Magic(ADC_CLK_10, MLED[9:0], switchSel);
 assign MOut = 0;
 
 //Use Mux to assign the proper output value to the total output
-Mux(COut,LOut,AOut,MOut,switchSel,Out);
+Mux(COut,LOut,AOut,MOut,buttonSel,Out);
+
+//We can only have one system controlling the LEDs at a time.
+//For that reason we need to control the driving of the LEDS using the buttonSEl
+always @ (buttonSel)
+begin
+case(buttonSel)
+	0: LEDR <= 0;
+	1: LEDR <= 0;
+	2: LEDR <= ALED;
+	3: LEDR <= MLED;
+endcase
+end
 
 //Write every number to the sevenseg display.
 SevenSegment(X, HEX0);
 SevenSegment(Y, HEX1);
-SevenSegment(switchSel, HEX2);
-SevenSegment(buttonSel, HEX3);
+SevenSegment(buttonSel, HEX2);
+SevenSegment(switchSel, HEX3);
 SevenSegment(Out[3:0], HEX4);
 SevenSegment(Out[7:4], HEX5);
 
