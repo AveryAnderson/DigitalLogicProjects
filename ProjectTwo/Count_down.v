@@ -10,7 +10,7 @@ module Count_down(clock, start, state, done);
 	
 	//Whenever our LFSR output changes, change the count to match the output
 	//Whenever we are not in state two, reset done to 0;
-	always @ (start or state)
+	/*always @ (start or state)
 	begin
 		if(state == 1)
 		begin
@@ -22,12 +22,23 @@ module Count_down(clock, start, state, done);
 			done = 0;
 		end
 		
-	end
+	end*/
 	
 	//Every time the clock rises, we want to count down one.  When we reach zero, we
 	//are done. Set the boolean so the higher level logic can change the state.
 	always @ (posedge clock)
 	begin
+		if(state == 1)
+		begin
+			count = start;
+		end
+		
+		if(state != 2)
+		begin
+			done = 0;
+		end
+	
+	
 		if(state == 2)
 		begin
 			if(count == 0)

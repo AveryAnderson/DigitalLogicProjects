@@ -4,7 +4,7 @@ module Clock_divider(inClock, outClock);
 	output reg outClock;
 	
 	//Dividing a 10MHz signal by 10,000 will produce a 1kHz signal
-	reg countTo = 0;
+	reg [13:0] countTo = 0;
 	
 	//In order to make this division, toggle the outClock each time we
 	//pass half of the desired period.  So count to 5,000. Include zero

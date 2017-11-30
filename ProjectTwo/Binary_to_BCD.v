@@ -1,4 +1,4 @@
-module Binary_to_BCD(binary, BCD);
+/*module Binary_to_BCD(binary, BCD);
 	input   [19:0] binary;
 	output  [19:0] BCD;
 	
@@ -24,19 +24,19 @@ module convert(binaryIn, carryIn, BCDOut, carryOut);
 	 
 	always @ (*)
 	begin
-		if((binaryIn + carryIn) > 16)
+		/*if((binaryIn + carryIn) > 16)
 		begin
 			carryOut = 1;
 			BCDOut   = binaryIn + carryIn;
 		end
 		
-		else if((binaryIn + carryIn) > 9)
+		else *//*if((binaryIn + carryIn) > 9)
 		begin
 			carryOut = 1;
-			BCDOut   = binaryIn + carryIn + 6;
+			BCDOut   = binaryIn + carryIn - 10;
 		end
 		
-		else
+	else
 		begin
 			carryOut = 0;
 			BCDOut   = binaryIn + carryIn;
@@ -47,4 +47,4 @@ module convert(binaryIn, carryIn, BCDOut, carryOut);
 	  
 	 
 	 
-endmodule
+endmodule*/

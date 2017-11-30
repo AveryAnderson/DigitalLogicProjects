@@ -1,16 +1,17 @@
-module LFSR( clock, enable, rand);
-	input clock, enable;
-	output reg [8:0] rand;
+module LFSR( clock, state, rando);
+	input 			  clock;
+	input 	  [1:0] state;
+	output reg [8:0] rando;
 	
-	initial rand = 0;
+	initial rando = 0;
 	
-	wire feedback = (rand[8] ^ rand[4]) || (rand == 0);
+	wire feedback = (rando[8] ^ rando[4]) || (rando == 0);
 	
 	always @ (posedge clock)
 	begin
-		if(enable)
+		if(state == 1)
 		begin
-			rand <= {rand[7:0],feedback};
+			rando <= {rando[7:0],feedback};
 		end
 	end
 	

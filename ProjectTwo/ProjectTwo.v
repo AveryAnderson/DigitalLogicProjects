@@ -25,11 +25,11 @@ module ProjectTwo(
 	output		     [9:0]		LEDR,
 
 	//////////// SW //////////
-	input 		     [9:0]		SW,
+	input 		     [9:0]		SW
 
 );
 
 //Pass our mapped systems into the actual top function
-Projet2_top(ADC_CLK_10, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
+Project2_top  pj2t(ADC_CLK_10, HEX0, HEX1, HEX2, HEX3, HEX4, HEX5, KEY, LEDR, SW);
 
 endmodule
