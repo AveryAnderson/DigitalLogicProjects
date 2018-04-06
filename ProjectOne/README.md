@@ -1,1 +1,3 @@
+In this project we created a verilog model of a basic ALU.  Incorporated on the ED10_Lite, this project uses the inputs of two switches to select between four major operation modes (Arithmetic, Logical, Comparison, and Magic) and uses Button select pins to distinguish between four functions within each mode (except for magic which isa nightrider LED function).
 
+The selected function operates on two four bit switch inputs, and the final result is displayed on a seven-segment display.  Some error states such as addition overflow also incorporate the LEDs on the board in order to indicate that the output is invalid.
